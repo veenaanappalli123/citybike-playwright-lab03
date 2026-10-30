@@ -46,3 +46,18 @@ This is a fictional service. Never use actual customer data or real credentials.
 - The workflow file in `.github/workflows/playwright.yml` and four `test.skip(...)` exercises are incomplete **intentionally**: students must implement them. Initially, 2 smoke tests pass and 4 challenges are skipped.
 - The tests and application run locally; **no Python, Docker, Jenkins, API keys, .env files, or previous CityBike Git lab are needed**.
 - Do not use `npm init playwright@latest`: that creates a different project and can overwrite or complicate the workshop files.
+
+
+## CI Quality Gate
+
+This project uses GitHub Actions to automatically run Playwright end-to-end tests on pushes to `main` and pull requests targeting `main`.
+
+### Workflow steps
+- Check out the repository.
+- Set up Node.js 22.
+- Install dependencies using `npm ci`.
+- Install Playwright Chromium and its system dependencies.
+- Run the Playwright end-to-end tests.
+- Upload the HTML test report, even if the tests fail.
+
+The workflow acts as a quality gate: if a test fails, the CI job fails. This helps detect regressions before changes are merged into `main`.
